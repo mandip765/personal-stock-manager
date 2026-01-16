@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Stock Manager</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Stock Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h2>Your Stock</h2>
+<body class="container py-3">
 
-{% for item in low %}
-<p style="color:red;">⚠ {{ item.name }} low stock</p>
-{% endfor %}
+    <h2 class="mb-3">Your Stock</h2>
 
-<ul>
-{% for item in items %}
-<li>{{ item.name }} — {{ item.quantity }}</li>
-{% endfor %}
-</ul>
+    <!-- Add Item Button -->
+    <a href="{% url 'add_item' %}" class="btn btn-success mb-3">➕ Add New Item</a>
+
+    <!-- Low Stock Alerts -->
+    {% if low %}
+        <div class="mb-3">
+        {% for item in low %}
+            <div class="alert alert-danger p-2">
+                ⚠ {{ item.name }} is low ({{ item.quantity }})
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Stock List -->
+    {% if items %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Low Stock Threshold</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.low_stock }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No items added yet.</p>
+    {% endif %}
 
 </body>
 </html>
