@@ -11,12 +11,12 @@ def read_bill(image_path):
 
     for line in text.splitlines():
         line = line.lower().strip()
-        match = re.search(r'([a-z\s]+)[\-–]\s*(\d+)\s*(kg|ctn|pcs)', line)
+        match = re.search(r'([a-z\\s]+)[\\-–]\\s*(\\d+)\\s*(kg|ctn|pcs)', line)
         if match:
             results.append({
-                "name": match.group(1).strip(),
-                "qty": int(match.group(2)),
-                "unit": match.group(3)
+                'name': match.group(1).strip(),
+                'qty': int(match.group(2)),
+                'unit': match.group(3)
             })
 
     return results
