@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Add Item</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<h2>Add New Item</h2>
+<h2>Add Item</h2>
+
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save</button>
+{% csrf_token %}
+<input name="name" placeholder="Item name" required>
+<input name="quantity" type="number" required>
+<input name="low_stock" type="number" required>
+<button>Add</button>
 </form>
-<a href="{% url 'dashboard' %}">Back to Dashboard</a>
-</body>
-</html>
