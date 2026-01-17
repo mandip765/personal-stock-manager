@@ -35,6 +35,20 @@ def upload_bill(request):
                     matched.append({
                         'item': item,
                         'qty': e['qty'],
+                        'unit': e['unit']
+                    })
+
+    if request.method == 'POST' and 'confirm' in request.POST:
+        for k, v in request.POST.items():
+            if k.startswith('item_'):
+                item = Item.objects.get(id=k.replace('item_', ''))
+                item.quantity += int(v)
+                item.save()
+        return redirect('dashboard')
+
+    return render(request, 'inventory/upload_bill.html', {
+        'matched': matched
+    })                        'qty': e['qty'],
                         'unit': e['unit'
                     })
 
