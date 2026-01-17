@@ -2,10 +2,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'change-this'
-
+SECRET_KEY = 'dev-secret-key'
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
