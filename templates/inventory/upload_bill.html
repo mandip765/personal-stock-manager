@@ -1,24 +1,10 @@
-<h2>Scan Delivery Bill</h2>
-
+<h3>Upload Bill</h3>
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
-<input type="file" name="bill" accept="image/*" capture="camera">
+<input type="file" name="bill" accept="image/*">
 <button>Scan</button>
 </form>
 
-{% if matched %}
-<hr>
-<h3>Confirm Stock In</h3>
-
-<form method="post">
-{% csrf_token %}
-{% for m in matched %}
-<p>
-<strong>{{ m.item.name }}</strong>
-<input type="number" name="item_{{ m.item.id }}" value="{{ m.qty }}">
-{{ m.unit }}
-</p>
-{% endfor %}
-<button name="confirm">✅ Confirm</button>
-</form>
+{% if text %}
+<pre>{{ text }}</pre>
 {% endif %}
